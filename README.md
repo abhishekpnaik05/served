@@ -194,16 +194,8 @@ FinalMealmate-main/
 └── README.md               # This file
 ```
 
-## 🔑 Razorpay Configuration
 
-The app uses Razorpay for payment processing. The keys are configured in `meal_buddy/settings.py`:
 
-```python
-RAZORPAY_KEY_ID = 'rzp_test_lT6VV3Hhr4ayCQ'
-RAZORPAY_KEY_SECRET = 'eFILRtRtJyDqNpE4Qkz5a3K9'
-```
-
-**Note:** These are test keys. For production, replace with your actual Razorpay credentials.
 
 ## 📱 Responsive Design
 
