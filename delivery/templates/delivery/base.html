@@ -1,0 +1,119 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Servd - Food Delivery{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'delivery/style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    {% block navbar %}
+    {% if request.session.username %}
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="navbar-brand">
+                <svg class="servd-logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" fill="none">
+                    <rect x="1" y="1" width="26" height="26" rx="7" fill="#3B82F6"/>
+                    <circle cx="14" cy="15" r="5" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+                    <line x1="10" y1="7" x2="10" y2="11" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+                    <line x1="8" y1="9" x2="12" y2="9" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+                <span class="servd-wordmark">Servd<span class="servd-dot">·</span></span>
+            </a>
+            <div class="navbar-search">
+                <svg class="navbar-search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#3B82F6" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="M21 21l-4.35-4.35" stroke-linecap="round"/>
+                </svg>
+                <input type="text" placeholder="Search restaurants, cuisines…">
+            </div>
+            <div class="navbar-nav">
+                <a href="/" class="navbar-link">Home</a>
+                <a href="{% url 'show_cart' request.session.username %}" class="cart-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                    <span class="cart-count">0</span>
+                </a>
+                <div class="user-avatar" title="{{ request.session.username }}">
+                    {{ request.session.username|first|upper }}
+                </div>
+                <a href="{% url 'signout' %}" class="logout-btn">Logout</a>
+            </div>
+            <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menu">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+        <div class="mobile-search">
+            <svg class="mobile-search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#3B82F6" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="M21 21l-4.35-4.35" stroke-linecap="round"/>
+            </svg>
+            <input type="text" placeholder="Search restaurants, cuisines…">
+        </div>
+    </nav>
+
+    <!-- Mobile Drawer Overlay -->
+    <div class="drawer-overlay" id="drawerOverlay"></div>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer" id="mobileDrawer">
+        <div class="drawer-header">
+            <a href="/" class="navbar-brand">
+                <svg class="servd-logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" fill="none">
+                    <rect x="1" y="1" width="26" height="26" rx="7" fill="#3B82F6"/>
+                    <circle cx="14" cy="15" r="5" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+                    <line x1="10" y1="7" x2="10" y2="11" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+                    <line x1="8" y1="9" x2="12" y2="9" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+                <span class="servd-wordmark">Servd<span class="servd-dot">·</span></span>
+            </a>
+            <button class="drawer-close" id="drawerClose" aria-label="Close menu">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <div class="drawer-nav">
+            <a href="/" class="drawer-link">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+                Home
+            </a>
+            <a href="{% url 'show_cart' request.session.username %}" class="drawer-link">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+                Cart
+            </a>
+            <div class="drawer-profile">
+                <div class="drawer-avatar">
+                    {{ request.session.username|first|upper }}
+                </div>
+                <span class="drawer-username">{{ request.session.username }}</span>
+            </div>
+            <a href="{% url 'signout' %}" class="drawer-link drawer-logout">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                </svg>
+                Logout
+            </a>
+        </div>
+    </div>
+    {% endif %}
+    {% endblock %}
+
+    {% block content %}{% endblock %}
+
+    <script src="{% static 'delivery/script.js' %}?v=3"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

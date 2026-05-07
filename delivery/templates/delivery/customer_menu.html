@@ -1,0 +1,42 @@
+{% extends 'delivery/base.html' %}
+{% block title %}{{ restaurant.name }} Menu - FinalMealmate{% endblock %}
+
+{% block content %}
+<section class="menu-section">
+    <div class="d-flex justify-between align-center mb-2">
+        <div>
+            <a href="/" class="btn btn-primary" style="height: 40px; width: auto; padding: 0 1.5rem;">← Back to Restaurants</a>
+            <h1 class="section-title">{{ restaurant.name }}</h1>
+            <p class="restaurant-cuisine-text">{{ restaurant.cuisine }}</p>
+        </div>
+        <a href="{% url 'show_cart' username %}" class="btn btn-primary" style="height: 40px; width: auto; padding: 0 1.5rem;">🛒 View Cart</a>
+    </div>
+
+    <div class="menu-grid">
+        {% for item in itemList %}
+        <div class="food-item-card">
+            <div class="food-item-image-container">
+                <img src="{{ item.picture }}" alt="{{ item.name }}" class="food-item-image">
+            </div>
+            <div class="food-item-info">
+                <div class="d-flex justify-between align-center">
+                    <h3 class="food-item-name">{{ item.name }}</h3>
+                    {% if item.vegeterian %}
+                    <span class="veg-icon"></span>
+                    {% else %}
+                    <span class="non-veg-icon"></span>
+                    {% endif %}
+                </div>
+                <p class="food-item-description">{{ item.description }}</p>
+                <div class="food-item-meta">
+                    <span class="food-item-price">₹{{ item.price }}</span>
+                    <a href="{% url 'add_to_cart' item.id %}" class="add-to-cart-btn">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-center">No items available in this menu.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

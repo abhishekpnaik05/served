@@ -1,0 +1,37 @@
+{% extends 'delivery/base.html' %}
+{% block title %}Admin Dashboard - FinalMealmate{% endblock %}
+{% block navbar %}{% endblock %}
+
+{% block content %}
+<div class="admin-dashboard">
+    <div class="admin-header">
+        <h1 class="section-title">👨‍💼 Admin Dashboard</h1>
+        <a href="/" class="btn btn-secondary">Logout</a>
+    </div>
+
+    <div class="admin-cards">
+        <div class="admin-card">
+            <div class="admin-card-number">🍽️</div>
+            <div class="admin-card-label">Manage Restaurants</div>
+            <div class="mt-2">
+                <a href="{% url 'open_add_restaurant' %}" class="btn btn-orange btn-sm">Add Restaurant</a>
+            </div>
+        </div>
+        <div class="admin-card">
+            <div class="admin-card-number">📋</div>
+            <div class="admin-card-label">View All Restaurants</div>
+            <div class="mt-2">
+                <a href="{% url 'open_show_restaurant' %}" class="btn btn-orange btn-sm">View Restaurants</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="checkout-card">
+        <h2 class="mb-2">Quick Actions</h2>
+        <div class="d-flex gap-2" style="flex-wrap: wrap;">
+            <a href="{% url 'open_add_restaurant' %}" class="btn btn-orange">➕ Add New Restaurant</a>
+            <a href="{% url 'open_show_restaurant' %}" class="btn btn-primary">📋 Show All Restaurants</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

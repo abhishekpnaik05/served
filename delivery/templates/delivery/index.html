@@ -1,0 +1,25 @@
+{% extends 'delivery/base.html' %}
+{% block title %}Welcome - Servd{% endblock %}
+
+{% block navbar %}{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-content">
+        <div class="hero-logo">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" fill="none" width="120" height="120">
+                <rect x="1" y="1" width="26" height="26" rx="7" fill="#3B82F6"/>
+                <circle cx="14" cy="15" r="5" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+                <line x1="10" y1="7" x2="10" y2="11" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+                <line x1="8" y1="9" x2="12" y2="9" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+        </div>
+        <h1 class="hero-title">Servd</h1>
+        <p class="hero-tagline">Delicious food delivered to your doorstep in minutes</p>
+        <div class="hero-buttons">
+            <a href="{% url 'open_signup' %}" class="btn btn-primary">Sign Up</a>
+            <a href="{% url 'open_signin' %}" class="btn btn-outline-white">Sign In</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

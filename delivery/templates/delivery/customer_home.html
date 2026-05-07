@@ -1,0 +1,351 @@
+{% extends 'delivery/base.html' %}
+{% load static %}
+{% block title %}Order Food Online - Servd{% endblock %}
+
+{% block content %}
+<!-- 1. HERO SECTION -->
+<section class="home-hero">
+    <div class="hero-bg-glow"></div>
+    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80" alt="Food left" class="hero-img-left">
+    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80" alt="Food right" class="hero-img-right">
+    
+    <div class="hero-content">
+        <h1 class="main-headline">Order food & groceries. Discover best restaurants. Servd!</h1>
+        
+        <div class="hero-inputs">
+            <div class="input-group location-input" style="position: relative;" id="location-input-container">
+                <span class="icon">📍</span>
+                <input type="text" placeholder="Enter your delivery location" id="location-input" readonly style="cursor: pointer;">
+                <span class="dropdown-arrow">▼</span>
+                <div class="location-dropdown" id="location-dropdown">
+                    <div class="loc-row">Bengaluru</div>
+                    <div class="loc-row">Mumbai</div>
+                    <div class="loc-row">Delhi</div>
+                    <div class="loc-row">Hyderabad</div>
+                    <div class="loc-row">Chennai</div>
+                    <div class="loc-row">Pune</div>
+                    <div class="loc-row">Kolkata</div>
+                    <div class="loc-row">Ahmedabad</div>
+                </div>
+            </div>
+            <div class="input-group search-input" style="position: relative;" id="search-input-container">
+                <input type="text" placeholder="Search for restaurant, item or more" id="search-input" autocomplete="off">
+                <span class="icon">🔍</span>
+                <div class="search-dropdown" id="search-dropdown">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </div>
+
+        <div class="service-cards">
+            <div class="service-card" id="card-food-delivery">
+                <div class="service-info">
+                    <h3>Food Delivery</h3>
+                    <p>FROM RESTAURANTS</p>
+                    <span class="discount-badge">UPTO 60% OFF</span>
+                </div>
+                <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=300&q=80" alt="Food">
+                <button class="arrow-btn">→</button>
+            </div>
+            <div class="service-card" id="card-groceries">
+                <div class="service-info">
+                    <h3>Groceries</h3>
+                    <p>INSTANT DELIVERY</p>
+                    <span class="discount-badge">UPTO 60% OFF</span>
+                </div>
+                <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=300&q=80" alt="Groceries">
+                <button class="arrow-btn">→</button>
+            </div>
+            <div class="service-card" id="card-dineout">
+                <div class="service-info">
+                    <h3>Dineout</h3>
+                    <p>EAT OUT & SAVE</p>
+                    <span class="discount-badge">UPTO 60% OFF</span>
+                </div>
+                <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=300&q=80" alt="Dineout">
+                <button class="arrow-btn">→</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 2. FOOD CATEGORY SCROLL SECTION -->
+<section class="food-categories-section">
+    <div class="section-header">
+        <h2 class="section-title">Order our best food options</h2>
+        <div class="nav-buttons">
+            <button class="nav-btn prev-btn" id="food-prev">←</button>
+            <button class="nav-btn next-btn" id="food-next">→</button>
+        </div>
+    </div>
+    
+    <div class="food-scroll-container" id="food-scroll">
+        <div class="food-grid">
+            <!-- Row 1 -->
+            <div class="food-item" data-category="Idli">
+                <div class="food-img-wrapper"><img src="https://images.unsplash.com/photo-1589301760014-d929f39ce9b1?w=150&q=80" alt="Idli" onerror="this.src='https://images.unsplash.com/photo-1630384060421-cb20d0e0649d?w=150&q=80'"></div>
+                <span>Idli</span>
+            </div>
+            <div class="food-item" data-category="Dosa">
+                <div class="food-img-wrapper"><img src="https://images.unsplash.com/photo-1668236543090-82eba5ee5976?w=150&q=80" alt="Dosa" onerror="this.src='https://images.unsplash.com/photo-1630384060421-cb20d0e0649d?w=150&q=80'"></div>
+                <span>Dosa</span>
+            </div>
+            <div class="food-item" data-category="Vada">
+                <div class="food-img-wrapper"><img src="https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=150&q=80" alt="Vada" onerror="this.src='https://images.unsplash.com/photo-1630384060421-cb20d0e0649d?w=150&q=80'"></div>
+                <span>Vada</span>
+            </div>
+            <div class="food-item" data-category="Coffee">
+                <div class="food-img-wrapper"><img src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=150&q=80" alt="Coffee" onerror="this.src='https://images.unsplash.com/photo-1511920170033-f8396924c348?w=150&q=80'"></div>
+                <span>Coffee</span>
+            </div>
+            <div class="food-item" data-category="Biryani">
+                <div class="food-img-wrapper"><img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=150&q=80" alt="Biryani" onerror="this.src='https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=150&q=80'"></div>
+                <span>Biryani</span>
+            </div>
+            <div class="food-item" data-category="Cake">
+                <div class="food-img-wrapper"><img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=150&q=80" alt="Cake" onerror="this.src='https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=150&q=80'"></div>
+                <span>Cake</span>
+            </div>
+            <div class="food-item" data-category="Tea">
+                <div class="food-img-wrapper"><img src="https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=150&q=80" alt="Tea" onerror="this.src='https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=150&q=80'"></div>
+                <span>Tea</span>
+            </div>
+            <div class="food-item" data-category="Burger">
+                <div class="food-img-wrapper"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=150&q=80" alt="Burger" onerror="this.src='https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=150&q=80'"></div>
+                <span>Burger</span>
+            </div>
+            <!-- Row 2 -->
+            <div class="food-item" data-category="Salad">
+                <div class="food-img-wrapper"><img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=150&q=80" alt="Salad" onerror="this.src='https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=150&q=80'"></div>
+                <span>Salad</span>
+            </div>
+            <div class="food-item" data-category="Juice">
+                <div class="food-img-wrapper"><img src="https://images.unsplash.com/photo-1613478223719-2ab802602423?w=150&q=80" alt="Juice" onerror="this.src='https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?w=150&q=80'"></div>
+                <span>Juice</span>
+            </div>
+            <div class="food-item" data-category="Poha">
+                <div class="food-img-wrapper"><img src="https://images.unsplash.com/photo-1605297833075-812328fb67ce?w=150&q=80" alt="Poha" onerror="this.src='https://images.unsplash.com/photo-1630384060421-cb20d0e0649d?w=150&q=80'"></div>
+                <span>Poha</span>
+            </div>
+            <div class="food-item" data-category="Omelette">
+                <div class="food-img-wrapper"><img src="https://images.unsplash.com/photo-1510693202970-5ce795166291?w=150&q=80" alt="Omelette" onerror="this.src='https://images.unsplash.com/photo-1525351484163-7529414344d8?w=150&q=80'"></div>
+                <span>Omelette</span>
+            </div>
+            <div class="food-item" data-category="Shake">
+                <div class="food-img-wrapper"><img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=150&q=80" alt="Shake" onerror="this.src='https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=150&q=80'"></div>
+                <span>Shake</span>
+            </div>
+            <div class="food-item" data-category="Pancake">
+                <div class="food-img-wrapper"><img src="https://images.unsplash.com/photo-1528207776546-365bb710ee93?w=150&q=80" alt="Pancake" onerror="this.src='https://images.unsplash.com/photo-1528207776546-365bb710ee93?w=150&q=80'"></div>
+                <span>Pancake</span>
+            </div>
+            <div class="food-item" data-category="Chole Bhature">
+                <div class="food-img-wrapper"><img src="https://images.unsplash.com/photo-1626082895617-2c6b16e13b0c?w=150&q=80" alt="Chole Bhature" onerror="this.src='https://images.unsplash.com/photo-1601050690597-df0568f70950?w=150&q=80'"></div>
+                <span>Chole Bhature</span>
+            </div>
+            <div class="food-item" data-category="Pizza">
+                <div class="food-img-wrapper"><img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=150&q=80" alt="Pizza" onerror="this.src='https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=150&q=80'"></div>
+                <span>Pizza</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CUISINE FILTER PILLS (Existing but improved) -->
+<section class="cuisine-filters" style="margin-top: 30px;">
+    <div class="filters-container">
+        <button class="filter-pill active" data-filter="All">
+            <span>🍽️</span> All
+        </button>
+        <button class="filter-pill" data-filter="Pizza">
+            <span>🍕</span> Pizza
+        </button>
+        <button class="filter-pill" data-filter="Burgers">
+            <span>🍔</span> Burgers
+        </button>
+        <button class="filter-pill" data-filter="Indian">
+            <span>🍛</span> Indian
+        </button>
+        <button class="filter-pill" data-filter="Chinese">
+            <span>🍜</span> Chinese
+        </button>
+        <button class="filter-pill" data-filter="Desserts">
+            <span>🍰</span> Desserts
+        </button>
+        <button class="filter-pill" data-filter="Beverages">
+            <span>🥤</span> Beverages
+        </button>
+    </div>
+</section>
+
+<!-- RESTAURANTS NEAR YOU (Grid) -->
+<section class="restaurants-section">
+    <div class="section-header" style="margin-bottom: 24px;">
+        <h2 class="section-title">Restaurants with online food delivery</h2>
+        <div id="active-filter-tag" class="active-filter-tag" style="display: none;">
+            Showing results for: <span id="filter-name">Biryani</span> <button id="clear-filter">×</button>
+        </div>
+        <div class="nav-buttons">
+            <button class="nav-btn prev-btn" id="res-grid-prev">←</button>
+            <button class="nav-btn next-btn" id="res-grid-next">→</button>
+        </div>
+    </div>
+    <div class="restaurants-grid" id="main-restaurant-grid">
+        {% for r in restaurantList %}
+        <div class="restaurant-card" data-id="{{ r.id }}" data-name="{{ r.name }}" data-cuisine="{{ r.cuisine }}" data-url="{% url 'view_menu' r.id username %}" onclick="window.location.href=this.getAttribute('data-url')">
+            <div class="restaurant-image-container">
+                <img src="{{ r.picture }}" alt="{{ r.name }}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="restaurant-fallback-img" style="display: none;">{{ r.name|first|upper }}</div>
+                {% if r.rating >= 4.5 %}
+                <span class="restaurant-badge">TOP RATED</span>
+                {% else %}
+                <span class="restaurant-badge">OFFERS</span>
+                {% endif %}
+            </div>
+            <h3 class="restaurant-name">{{ r.name }}</h3>
+            <p class="restaurant-cuisine">{{ r.cuisine }}</p>
+            <div class="restaurant-meta">
+                <span class="rating">⭐ {{ r.rating }}</span>
+                <span class="delivery-time">🕐 30-40 mins</span>
+                <span class="price-range">₹200-500</span>
+            </div>
+        </div>
+        {% empty %}
+        <p class="no-restaurants">No restaurants available. Please check back later!</p>
+        {% endfor %}
+    </div>
+    <div class="pagination-dots" id="res-pagination-dots"></div>
+</section>
+
+<!-- 4. TOP RESTAURANTS HORIZONTAL SCROLL SECTION -->
+<section class="top-restaurants-section">
+    <div class="section-header">
+        <h2 class="section-title">Top restaurants near you</h2>
+        <div class="nav-buttons">
+            <button class="nav-btn prev-btn" id="top-res-prev">←</button>
+            <button class="nav-btn next-btn" id="top-res-next">→</button>
+        </div>
+    </div>
+    
+    <div class="restaurants-grid" id="top-res-grid">
+        {% for r in restaurantList|slice:":8" %}
+        <div class="restaurant-card" data-id="{{ r.id }}" data-name="{{ r.name }}" data-cuisine="{{ r.cuisine }}" data-url="{% url 'view_menu' r.id username %}" onclick="window.location.href=this.getAttribute('data-url')">
+            <div class="restaurant-image-container">
+                <img src="{{ r.picture }}" alt="{{ r.name }}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="restaurant-fallback-img" style="display: none;">{{ r.name|first|upper }}</div>
+                <span class="restaurant-badge">TOP RATED</span>
+            </div>
+            <h3 class="restaurant-name">{{ r.name }}</h3>
+            <p class="restaurant-cuisine">{{ r.cuisine }}</p>
+            <div class="restaurant-meta">
+                <span class="rating">⭐ {{ r.rating }}</span>
+                <span class="delivery-time">🕐 30-40 mins</span>
+                <span class="price-range">₹200-500</span>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="pagination-dots" id="top-res-pagination-dots"></div>
+</section>
+
+<!-- 5. FOOTER -->
+<footer class="app-footer">
+    <div class="footer-top">
+        <div class="footer-col brand-col">
+            <a href="/" class="footer-brand">
+                <svg class="servd-logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" fill="none">
+                    <rect x="1" y="1" width="26" height="26" rx="7" fill="#3B82F6"/>
+                    <circle cx="14" cy="15" r="5" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+                    <line x1="10" y1="7" x2="10" y2="11" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+                    <line x1="8" y1="9" x2="12" y2="9" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+                <span class="servd-wordmark">Servd<span class="servd-dot">·</span></span>
+            </a>
+            <p class="tagline">Delivering happiness, one meal at a time.</p>
+            <div class="social-icons">
+                <a href="#" class="social-icon">𝕏</a>
+                <a href="#" class="social-icon">IG</a>
+                <a href="#" class="social-icon">IN</a>
+                <a href="#" class="social-icon">FB</a>
+            </div>
+        </div>
+        <div class="footer-col">
+            <h4>Company</h4>
+            <a href="#">About Us</a>
+            <a href="#">Careers</a>
+            <a href="#">Blog</a>
+            <a href="#">Press</a>
+            <a href="#">Investor Relations</a>
+        </div>
+        <div class="footer-col">
+            <h4>For You</h4>
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+            <a href="#">Security</a>
+            <a href="#">Sitemap</a>
+            <a href="#">Gift Cards</a>
+        </div>
+        <div class="footer-col partners-col">
+            <h4>Partners</h4>
+            <a href="#">Partner with us</a>
+            <a href="#">Apps for you</a>
+            <a href="#">Add your restaurant</a>
+            <h4 style="margin-top: 20px;">Get the app</h4>
+            <div class="app-buttons">
+                <button class="app-store-btn">App Store</button>
+                <button class="app-store-btn">Play Store</button>
+            </div>
+        </div>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">
+        <div class="copyright">© 2025 Servd Technologies Pvt. Ltd.</div>
+        <div class="country-selector">🇮🇳 India</div>
+        <div class="made-with-love">Made with ❤️ in Bengaluru</div>
+    </div>
+</footer>
+
+<!-- 3. RESTAURANT MODAL (Full Menu Drawer) -->
+<div class="restaurant-modal-overlay" id="restaurantModalOverlay">
+    <div class="restaurant-modal" id="restaurantModal">
+        <button class="modal-close" id="closeRestaurantModal">×</button>
+        <div class="modal-hero">
+            <img id="modalRestImg" src="" alt="Restaurant">
+            <div class="modal-hero-gradient"></div>
+            <div class="modal-hero-content">
+                <h2 id="modalRestName" class="modal-rest-name">Restaurant Name</h2>
+                <div class="modal-rest-tags">
+                    <span id="modalRestRating" class="modal-rating">★ 4.5</span>
+                    <span id="modalRestCuisine" class="modal-cuisine">Cuisines</span>
+                </div>
+                <div class="modal-rest-meta">
+                    <span>⏱ 30-40 mins</span>
+                    <span>•</span>
+                    <span>₹400 for two</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="modal-menu-section">
+            <div class="menu-tabs">
+                <button class="menu-tab active" data-target="starters">Starters</button>
+                <button class="menu-tab" data-target="mains">Mains</button>
+                <button class="menu-tab" data-target="desserts">Desserts</button>
+                <button class="menu-tab" data-target="beverages">Beverages</button>
+            </div>
+            
+            <div class="menu-items-container" id="modalMenuItems">
+                <!-- Populated via JS -->
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Pass session username to JS
+    const sessionUsername = "{{ request.session.username|default:'' }}";
+</script>
+{% endblock %}

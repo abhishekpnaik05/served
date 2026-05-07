@@ -1,0 +1,47 @@
+{% extends 'delivery/base.html' %}
+{% block title %}Order Confirmed - FinalMealmate{% endblock %}
+
+{% block content %}
+<div class="order-tracking">
+    <div class="order-card">
+        <div class="text-center mb-2">
+            <h1 style="font-size: 3rem;">✅</h1>
+            <h1 class="section-title">Order Confirmed!</h1>
+            <p class="mb-2">Thank you for your order, {{ username }}!</p>
+        </div>
+
+        <div class="order-header">
+            <h3>Delivery Address</h3>
+        </div>
+        <p class="mb-3">{{ customer.address }}</p>
+
+        <div class="order-status">
+            <span class="status-dot"></span>
+            <span>Your order is being prepared and will be delivered shortly.</span>
+        </div>
+
+        <div class="timeline">
+            <div class="timeline-item completed">
+                <strong>Order Placed</strong>
+                <p>Your order has been received</p>
+            </div>
+            <div class="timeline-item completed">
+                <strong>Preparing</strong>
+                <p>Restaurant is preparing your food</p>
+            </div>
+            <div class="timeline-item pending">
+                <strong>Out for Delivery</strong>
+                <p>Your food is on the way</p>
+            </div>
+            <div class="timeline-item pending">
+                <strong>Delivered</strong>
+                <p>Enjoy your meal!</p>
+            </div>
+        </div>
+
+        <div class="text-center mt-3">
+            <a href="/" class="btn btn-primary" style="height: 40px; width: auto; padding: 0 1.5rem;">Order More Food</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

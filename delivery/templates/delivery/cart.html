@@ -1,0 +1,51 @@
+{% extends 'delivery/base.html' %}
+{% block title %}Your Cart - FinalMealmate{% endblock %}
+
+{% block content %}
+<div class="cart-page">
+    <div class="cart-items">
+        <h1 class="section-title">🛒 Your Cart</h1>
+        
+        {% for item in itemList %}
+        <div class="cart-item">
+            <img src="{{ item.picture }}" alt="{{ item.name }}" class="cart-item-image">
+            <div class="cart-item-info">
+                <h3 class="cart-item-name">{{ item.name }}</h3>
+                <p class="cart-item-description">{{ item.description }}</p>
+                <p class="cart-item-price">₹{{ item.price }}</p>
+            </div>
+        </div>
+        {% empty %}
+        <div class="text-center">
+            <p class="mb-2">Your cart is empty!</p>
+            <a href="/" class="btn btn-primary" style="height: 40px; width: auto; padding: 0 1.5rem;">Browse Restaurants</a>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% if itemList %}
+    <div class="cart-summary">
+        <h2 class="cart-summary-title">Order Summary</h2>
+        <div class="summary-row">
+            <span>Subtotal</span>
+            <span>₹{{ total_price }}</span>
+        </div>
+        <div class="summary-row">
+            <span>Delivery Fee</span>
+            <span>₹40</span>
+        </div>
+        <div class="summary-row">
+            <span>Taxes</span>
+            <span>₹{{ total_price|floatformat:0|add:0|floatformat:0 }}</span>
+        </div>
+        <div class="summary-row total">
+            <span>Total</span>
+            <span>₹{{ total_price|floatformat:0|add:40|floatformat:0 }}</span>
+        </div>
+        <form action="{% url 'checkout' username %}" method="get">
+            <button type="submit" class="checkout-btn">Proceed to Checkout</button>
+        </form>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

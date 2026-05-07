@@ -1,0 +1,58 @@
+{% extends 'delivery/base.html' %}
+{% block title %}Manage Restaurants - FinalMealmate{% endblock %}
+{% block navbar %}{% endblock %}
+
+{% block content %}
+<div class="admin-dashboard">
+    <div class="admin-header">
+        <h1 class="section-title">📋 Manage Restaurants</h1>
+        <a href="{% url 'open_add_restaurant' %}" class="btn btn-orange">➕ Add Restaurant</a>
+    </div>
+
+    <div class="checkout-card">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Restaurant</th>
+                    <th>Picture</th>
+                    <th>Cuisine</th>
+                    <th>Rating</th>
+                    <th>Operations</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in restaurantList %}
+                <tr>
+                    <td><strong>{{ r.name }}</strong></td>
+                    <td>
+                        <img src="{{ r.picture }}" alt="{{ r.name }}">
+                    </td>
+                    <td>{{ r.cuisine }}</td>
+                    <td>
+                        <span class="rating">
+                            <span class="rating-star">★</span>
+                            {{ r.rating }}
+                        </span>
+                    </td>
+                    <td>
+                        <div class="table-actions">
+                            <a href="{% url 'open_update_restaurant' r.id %}" class="btn-edit btn-sm">Edit</a>
+                            <a href="{% url 'delete_restaurant' r.id %}" class="btn-delete btn-sm">Delete</a>
+                            <a href="{% url 'open_update_menu' r.id %}" class="btn-view btn-sm">Menu</a>
+                        </div>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center">No restaurants found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="mt-2">
+        <a href="{% url 'open_show_restaurant' %}" class="btn btn-secondary">← Back to Admin Home</a>
+    </div>
+</div>
+{% endblock %}
